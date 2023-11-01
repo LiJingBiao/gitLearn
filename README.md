@@ -47,3 +47,9 @@ git branch -M main
 git checkout -b branch_name tag_name
 ```
 
+## git放弃未提交的修改
+
+```
+git checkout README.md 
+```
+
