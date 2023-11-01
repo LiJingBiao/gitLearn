@@ -65,3 +65,14 @@ git checkout a1e8fb5 hello.py
 git reset --hard HEAD~1
 ```
 
+## 移除当前目录下未被跟踪的文件
+
+```
+# 移除当前目录下未被跟踪的文件。-f（强制）标记是必需的
+git clean -f
+# 移除未跟踪的文件，但限制在某个路径下。
+git clean -f <path>
+# 移除未跟踪的文件，以及目录。
+git clean -df
+```
+
