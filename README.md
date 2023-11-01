@@ -53,3 +53,15 @@ git checkout -b branch_name tag_name
 git checkout README.md 
 ```
 
+## 从之前的提交中查看 `hello.py` 文件，你可以使用下面的命令：
+
+```
+git checkout a1e8fb5 hello.py
+```
+
+## 回滚上次提交
+
+```
+git reset --hard HEAD~1
+```
+
