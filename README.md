@@ -35,3 +35,15 @@ git push --set-upstream origin branchName
 git cherry -v
 ```
 
+## git修改当前分支为main
+
+```
+git branch -M main
+```
+
+## git 切换到某个tag
+
+```
+git checkout -b branch_name tag_name
+```
+
