@@ -125,6 +125,15 @@ git restore --staged file1.txt
 git restore --staged . 
 ```
 
+## git stash使用
+
+```
+# 贮藏
+git stash save stash_name
+使用贮藏
+git stash pop stash@{0}
+```
+
 
 
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
