@@ -134,6 +134,52 @@ git stash save stash_name
 git stash pop stash@{0}
 ```
 
+## git命令重命名
+
+```
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+
+git config --global alias.mg merge
+git config --global alias.lg log
+git config --global alias.ps push
+git config --global alias.pl pull
+
+git config --global alias.ad add
+git config --global alias.df diff  
+git config --global alias.rs reset
+git config --global alias.rm remote
+
+git config --global alias.fe fetch
+git config --global alias.rb rebase
+git config --global alias.tg tag
+git config --global alias.sh stash
+```
+
+文件最后会写到`~/.gitconfig`
+
+```
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	mg = merge
+	lg = log
+	ps = push
+	pl = pull
+	ad = add
+	df = diff
+	rs = reset
+	rm = remote
+	fe = fetch
+	rb = rebase
+	tg = tag
+	sh = stash
+```
+
 
 
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
