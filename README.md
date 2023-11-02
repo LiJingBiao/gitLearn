@@ -130,7 +130,7 @@ git restore --staged .
 ```
 # 贮藏
 git stash save stash_name
-使用贮藏
+# 使用贮藏
 git stash pop stash@{0}
 ```
 
