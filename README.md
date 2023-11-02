@@ -62,7 +62,12 @@ git checkout -b branch_name tag_name
 ## git放弃未提交的修改
 
 ```
-git checkout README.md 
+# 丢弃工作区的修改
+git checkout -- README.md
+# 切换到master分支
+git checkout master 
+# git checkout -- file 是用来丢弃工作区(working directory)对文件file的修改。这会将文件file恢复到最后一次git commit或git add时的状态。
+# git checkout file 主要用于切换分支。它会将文件file切换到指定分支上的版本
 ```
 
 ## 从之前的提交中查看 `hello.py` 文件，你可以使用下面的命令：
@@ -111,6 +116,16 @@ git log <since>..<until>
 git log <file>
 
 ```
+
+## 从git暂存区恢复文件
+
+```
+git restore --staged file1.txt
+恢复暂存区中的所有文件。
+git restore --staged . 
+```
+
+
 
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
 
