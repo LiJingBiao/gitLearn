@@ -1,4 +1,13 @@
 # gitLearn
+
+## 跳过暂存区，直接提交工作目录中所有改变的文件
+
+```
+git commit -a -m "提交消息"
+# 通过创建一个新的提交，以替换当前分支的前端。所代表的含义就是在最新一次提交的基础上进行提交
+git commit --amend -m "提交消息"
+```
+
 ## 拉取远程分支
 
 ```
@@ -53,7 +62,12 @@ git checkout -b branch_name tag_name
 ## git放弃未提交的修改
 
 ```
-git checkout README.md 
+# 丢弃工作区的修改
+git checkout -- README.md
+# 切换到master分支
+git checkout master 
+# git checkout -- file 是用来丢弃工作区(working directory)对文件file的修改。这会将文件file恢复到最后一次git commit或git add时的状态。
+# git checkout file 主要用于切换分支。它会将文件file切换到指定分支上的版本
 ```
 
 ## 从之前的提交中查看 `hello.py` 文件，你可以使用下面的命令：
@@ -102,28 +116,70 @@ git log <since>..<until>
 git log <file>
 
 ```
-32523523523523523
-23523523
-23452
-5
-23523
-2352
-5325
-235
-235
-23523
-5235
-235
-235
-23523
-5235
-23523
-523
-5235
-235235
-23523
-5235
-23525
+
+## 从git暂存区恢复文件
+
+```
+git restore --staged file1.txt
+恢复暂存区中的所有文件。
+git restore --staged . 
+```
+
+## git stash使用
+
+```
+# 贮藏
+git stash save stash_name
+# 使用贮藏
+git stash pop stash@{0}
+```
+
+## git命令重命名
+
+```
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+
+git config --global alias.mg merge
+git config --global alias.lg log
+git config --global alias.ps push
+git config --global alias.pl pull
+
+git config --global alias.ad add
+git config --global alias.df diff  
+git config --global alias.rs reset
+git config --global alias.rm remote
+
+git config --global alias.fe fetch
+git config --global alias.rb rebase
+git config --global alias.tg tag
+git config --global alias.sh stash
+```
+
+文件最后会写到`~/.gitconfig`
+
+```
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	mg = merge
+	lg = log
+	ps = push
+	pl = pull
+	ad = add
+	df = diff
+	rs = reset
+	rm = remote
+	fe = fetch
+	rb = rebase
+	tg = tag
+	sh = stash
+```
+
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
 
 
