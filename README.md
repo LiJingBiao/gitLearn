@@ -180,6 +180,13 @@ git config --global alias.sh stash
 	sh = stash
 ```
 
+## git更新远程分支
+
+```
+git remote update origin -p
+git fetch -p
+```
+
 
 
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
