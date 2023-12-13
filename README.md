@@ -11,14 +11,29 @@ git commit --amend -m "提交消息"
 ## 拉取远程分支
 
 ```
-git fetch origin master 
+git fetch origin main 
 ```
 
 ## 远程分支合并本地分支
 
 ```
-git merge origin/master
+git merge origin/main
 ```
+
+如果报错`fatal: refusing to merge unrelated histories`使用下面指令
+
+```shell
+/**
+出现 "fatal: refusing to merge unrelated histories" 错误通常是由于两个不相关的 Git 仓库（例如，一个全新的本地仓库和一个包含提交历史的远程仓库）尝试进行合并操作。
+这种情况下，Git 默认会拒绝合并操作，因为它认为这两个仓库的提交历史没有共同的祖先，无法简单地进行合并。
+通过添加 --allow-unrelated-histories 选项，您可以告诉 Git 允许合并这两个不相关的历史。然后，您可以手动处理任何合并冲突，确保合并后的内容符合预期。
+*/
+git merge origin/main --allow-unrelated-histories
+```
+
+
+
+
 
 ## 本地分支`develop`合并当前分支
 
