@@ -1,4 +1,4 @@
-# gitLearn
+gitLearn
 
 ## 跳过暂存区，直接提交工作目录中所有改变的文件
 
@@ -200,6 +200,12 @@ git config --global alias.sh stash
 ```
 git remote update origin -p
 git fetch -p
+```
+
+## git要将某个文件还原到特定的提交，您可以使用以下命令：
+
+```
+git checkout <commit-hash> -- <file-path>
 ```
 
 
