@@ -146,7 +146,16 @@ git restore --staged .
 # 贮藏
 git stash save stash_name
 # 使用贮藏
-git stash pop stash@{0}
+git stash pop stash@{<stash_id>}
+# 应用最新的 stash 更改并从 stash 列表中删除
+git stash pop
+# 查看当前的 stash 列表
+git stash list
+# 应用最新的 stash 更改但不删除它
+git stash apply
+# 查看 stash 中的更改内容
+git stash show
+
 ```
 
 ## git命令重命名
