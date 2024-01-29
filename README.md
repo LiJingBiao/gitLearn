@@ -223,3 +223,70 @@ git checkout <commit-hash> -- <file-path>
 
 
 
+## github配置了ssh无法clone的问题
+
+在配置了代理之后，会出现ssh无法连接github的情况（猜测是因为防火墙会拒绝来自代理服务器的SSH连接）
+
+[官方解决方案链接](https://docs.github.com/zh/authentication/troubleshooting-ssh/using-ssh-over-the-https-port)
+
+这时候应该尝试使用HTTPS端口建立的SSH连接。
+
+要测试通过HTTPS端口的SSH是否可行
+
+```text
+$ ssh -T -p 443 git@ssh.github.com
+> Hi USERNAME! You've successfully authenticated, but GitHub does not
+> provide shell access.
+```
+
+端口为443的主机名为`ssh.github.com`
+
+此时克隆仓库的方式为
+
+```text
+git clone ssh://git@ssh.github.com:443/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
+
+很麻烦，但可以通过覆盖SSH设置来强制与[http://github.com](https://link.zhihu.com/?target=http%3A//github.com)的任何连接均通过上面验证成功的服务器和端口进行。
+
+一劳永逸
+
+需要在`~/.ssh/config`中编辑内容如下
+
+```text
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+    User git
+```
+
+可以再次测试到[http://github.com](https://link.zhihu.com/?target=http%3A//github.com)的连接进行测试
+
+```text
+$ ssh -T git@github.com
+> Hi USERNAME! You've successfully authenticated, but GitHub does not
+> provide shell access.
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
