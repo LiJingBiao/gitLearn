@@ -129,7 +129,8 @@ git log --grep="<pattern>"
 git log <since>..<until>
 # 只显示包含特定文件的提交。查找特定文件的历史这样做会很方便。
 git log <file>
-
+# 查看指定分支日志
+git log --oneline master
 ```
 
 ## 从git暂存区恢复文件
@@ -157,6 +158,17 @@ git stash apply
 git stash show
 
 ```
+## git cherry-pick使用
+```
+某段提交移到当前分支
+git cherry-pick '88b4687c8e^..7bc7403bcf'
+CONFLICT (content): Merge conflict in InternalFramework/SettingStorage.h
+解决冲突
+git add .
+git cherry-pick --continue
+```
+## 中断 cherry-pick
+git cherry-pick --abort
 
 ## git命令重命名
 
