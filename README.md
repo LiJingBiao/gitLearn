@@ -168,8 +168,9 @@ git add .
 git cherry-pick --continue
 ```
 ## 中断 cherry-pick
+```
 git cherry-pick --abort
-
+```
 ## git命令重命名
 
 ```
