@@ -357,7 +357,7 @@ git branch -m old-branch new-branch
 
 通过这些命令，你可以在需要时强制重命名分支，覆盖现有的分支名称。
 
-
+## 删除分支
 在 Git 中，你可以使用 `git branch -d` 或 `git branch -D` 命令来删除本地分支。你也可以使用 `git push` 命令来删除远程分支。以下是详细的步骤：
 
 ### 删除本地分支
