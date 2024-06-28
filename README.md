@@ -357,6 +357,91 @@ git branch -m old-branch new-branch
 
 通过这些命令，你可以在需要时强制重命名分支，覆盖现有的分支名称。
 
+
+在 Git 中，你可以使用 `git branch -d` 或 `git branch -D` 命令来删除本地分支。你也可以使用 `git push` 命令来删除远程分支。以下是详细的步骤：
+
+### 删除本地分支
+
+1. **删除已合并的本地分支**：
+
+    如果分支已经被合并到当前分支或其他分支，你可以使用 `-d` 选项：
+
+    ```sh
+    git branch -d <branch-name>
+    ```
+
+    例如，删除名为 `feature-branch` 的分支：
+
+    ```sh
+    git branch -d feature-branch
+    ```
+
+2. **强制删除本地分支**：
+
+    如果分支尚未合并，你可以使用 `-D` 选项强制删除：
+
+    ```sh
+    git branch -D <branch-name>
+    ```
+
+    例如，强制删除名为 `feature-branch` 的分支：
+
+    ```sh
+    git branch -D feature-branch
+    ```
+
+### 删除远程分支
+
+要删除远程分支，你需要使用 `git push` 命令并指定删除选项：
+
+```sh
+git push origin --delete <branch-name>
+```
+
+例如，删除远程仓库中的 `feature-branch` 分支：
+
+```sh
+git push origin --delete feature-branch
+```
+
+### 示例
+
+假设你有一个名为 `feature-old` 的分支，并且你想删除它：
+
+1. **删除本地分支**：
+
+    如果分支已经合并：
+
+    ```sh
+    git branch -d feature-old
+    ```
+
+    如果分支尚未合并：
+
+    ```sh
+    git branch -D feature-old
+    ```
+
+2. **删除远程分支**：
+
+    ```sh
+    git push origin --delete feature-old
+    ```
+
+### 注意事项
+
+- **删除本地分支**：确保你不在要删除的分支上。你不能删除当前所在的分支。
+- **删除远程分支**：确保你有权限删除远程分支。
+
+### 总结
+
+- **删除已合并的本地分支**：`git branch -d <branch-name>`
+- **强制删除本地分支**：`git branch -D <branch-name>`
+- **删除远程分支**：`git push origin --delete <branch-name>`
+
+通过这些命令，你可以轻松地删除不再需要的本地和远程分支。
+
+
 ## git命令重命名
 
 ```
