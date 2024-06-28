@@ -202,6 +202,161 @@ git rebase --continue
 ```
 
 
+
+
+
+
+## 修改分支名
+
+在 Git 中，你可以使用 `git branch -m` 命令来修改分支的名称。这个命令既可以在当前分支上使用，也可以在指定的其他分支上使用。
+
+### 修改当前分支的名称
+
+如果你想重命名当前所在的分支，只需使用以下命令：
+
+```sh
+git branch -m <new-branch-name>
+```
+
+例如，如果你当前在 `old-branch` 分支上，想将其重命名为 `new-branch`：
+
+```sh
+git branch -m new-branch
+```
+
+### 修改其他分支的名称
+
+如果你想重命名一个非当前所在的分支，需要指定当前名称和新名称：
+
+```sh
+git branch -m <old-branch-name> <new-branch-name>
+```
+
+例如，将 `old-branch` 重命名为 `new-branch`：
+
+```sh
+git branch -m old-branch new-branch
+```
+
+### 推送重命名后的分支到远程仓库
+
+重命名本地分支后，你可能还需要更新远程仓库中的分支。可以使用以下步骤：
+
+1. **删除远程旧分支**：
+
+    ```sh
+    git push origin --delete <old-branch-name>
+    ```
+
+2. **推送新分支**：
+
+    ```sh
+    git push origin <new-branch-name>
+    ```
+
+3. **更新本地追踪分支**（如果需要）：
+
+    如果你有一个本地分支在追踪远程分支，你需要更新追踪信息：
+
+    ```sh
+    git branch --unset-upstream
+    git branch -u origin/<new-branch-name>
+    ```
+
+### 示例
+
+假设你有一个名为 `feature-old` 的分支，想将其重命名为 `feature-new`：
+
+1. **重命名本地分支**：
+
+    ```sh
+    git branch -m feature-old feature-new
+    ```
+
+2. **删除远程旧分支**：
+
+    ```sh
+    git push origin --delete feature-old
+    ```
+
+3. **推送新分支**：
+
+    ```sh
+    git push origin feature-new
+    ```
+
+4. **更新本地追踪分支**（如果需要）：
+
+    ```sh
+    git branch --unset-upstream
+    git branch -u origin/feature-new
+    ```
+
+### 总结
+
+- **重命名当前分支**：`git branch -m <new-branch-name>`
+- **重命名其他分支**：`git branch -m <old-branch-name> <new-branch-name>`
+- **删除远程旧分支**：`git push origin --delete <old-branch-name>`
+- **推送新分支**：`git push origin <new-branch-name>`
+- **更新本地追踪分支**：`git branch --unset-upstream` 和 `git branch -u origin/<new-branch-name>`
+
+通过这些步骤，你可以顺利地重命名分支并确保远程仓库中的分支名称也得到更新。
+
+`git branch -M` 是 `git branch -m` 的一种变体，主要用于强制重命名分支。如果目标分支名称已经存在，`-M` 选项会覆盖现有的分支名称，而 `-m` 选项在目标分支名称已存在时会失败。
+
+### 使用方法
+
+1. **重命名当前分支**：
+
+    ```sh
+    git branch -M <new-branch-name>
+    ```
+
+    例如，如果你当前在 `old-branch` 分支上，想将其重命名为 `new-branch`，即使 `new-branch` 已经存在：
+
+    ```sh
+    git branch -M new-branch
+    ```
+
+2. **重命名其他分支**：
+
+    ```sh
+    git branch -M <old-branch-name> <new-branch-name>
+    ```
+
+    例如，将 `old-branch` 重命名为 `new-branch`，即使 `new-branch` 已经存在：
+
+    ```sh
+    git branch -M old-branch new-branch
+    ```
+
+### 示例
+
+假设你有一个名为 `feature-old` 的分支，并且你想将其重命名为 `feature-new`，即使 `feature-new` 已经存在：
+
+1. **重命名当前分支**：
+
+    ```sh
+    git branch -M feature-new
+    ```
+
+2. **重命名其他分支**：
+
+    ```sh
+    git branch -M feature-old feature-new
+    ```
+
+### 注意
+
+使用 `-M` 选项时要小心，因为它会覆盖现有的分支，这可能会导致你丢失对旧分支的引用。如果你不确定目标分支是否存在，或者不希望覆盖现有分支，最好使用 `-m` 选项并手动检查分支是否存在。
+
+### 总结
+
+- **强制重命名当前分支**：`git branch -M <new-branch-name>`
+- **强制重命名其他分支**：`git branch -M <old-branch-name> <new-branch-name>`
+
+通过这些命令，你可以在需要时强制重命名分支，覆盖现有的分支名称。
+
 ## git命令重命名
 
 ```
