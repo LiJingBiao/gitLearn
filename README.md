@@ -171,6 +171,32 @@ git cherry-pick --continue
 ```
 git cherry-pick --abort
 ```
+## git rebase 缩减提交记录
+```
+#缩减前五条记录
+git reabse -i HEAD~5
+#进入交互界面
+pick 88b4687c8e feat: 合并搜索结果
+pick 8cfb053bae feat: 添加搜索输入间隔和延时的ducc配置
+pick 7bc7403bcf feat: 修改搜索输入间隔和延时间隔
+pick b37be32899 feat: 优化代码
+pick 7d3a2081bd feat: 修改配置字段
+...
+
+# 修改
+pick 88b4687c8e feat: 合并搜索结果
+s 8cfb053bae feat: 添加搜索输入间隔和延时的ducc配置   
+s 7bc7403bcf feat: 修改搜索输入间隔和延时间隔   
+s b37be32899 feat: 优化代码   
+s 7d3a2081bd feat: 修改配置字段
+保存退出
+:wq
+
+git rebase --continue
+
+```
+
+
 ## git命令重命名
 
 ```
