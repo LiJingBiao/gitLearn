@@ -44,11 +44,16 @@ git merge develop
 ## 创建分支
 
 ```
+# <new-branch> 是你要创建的新分支的名称。
+# <start-point> 是你希望新分支基于的分支或提交。
+git checkout -b <new-branch> <start-point>
+
 git checkout -b branchName
 # 相当于
 git branch branchName
 git checkout branchName
 ```
+
 
 ## 将创建的本地分支与远程分支进行关联
 
