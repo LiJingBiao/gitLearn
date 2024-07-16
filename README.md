@@ -499,6 +499,7 @@ git fetch -p
 
 ```
 git checkout <commit-hash> -- <file-path>
+git checkout 6c8b47a6fc -- MyLink.m
 ```
 
 ## git上传大文件
