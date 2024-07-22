@@ -520,7 +520,26 @@ git push origin master #上传大文件
 
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
 
+## 拉代码git报错You have not concluded your merge (MERGE_HEAD exists).
+这表示 Git 检测到一个未完成的合并操作
+第一种方法
+```
+git merge --abort
+```
+第二种解决方法
+```
+# 查看当前状态
+git status
 
+# 解决冲突，编辑冲突文件并解决冲突内容
+nano conflicted_file.txt
+
+# 标记冲突已解决
+git add conflicted_file.txt
+
+# 完成合并并提交
+git commit
+```
 
 ## github配置了ssh无法clone的问题
 
