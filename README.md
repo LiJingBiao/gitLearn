@@ -541,6 +541,14 @@ git add conflicted_file.txt
 git commit
 ```
 
+## 查看某次提交更新的文件
+```
+git show --name-only a1b2c3d4
+
+git show --name-status a1b2c3d4
+#显示文件名以及文件的状态（如新增、修改、删除）
+```
+
 ## github配置了ssh无法clone的问题
 
 在配置了代理之后，会出现ssh无法连接github的情况（猜测是因为防火墙会拒绝来自代理服务器的SSH连接）
