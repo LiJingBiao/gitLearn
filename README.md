@@ -19,6 +19,38 @@ git fetch origin main
 ```
 git merge origin/main
 ```
+## 从feture分支合并到dev分支示例
+从 dev 分支创建 feature 分支：
+```
+git checkout dev
+git checkout -b feature
+
+```
+在 feature 分支上进行开发。
+将 dev 分支的更改合并到 feature 分支：
+```
+git checkout feature
+git pull origin dev
+```
+解决冲突并提交：
+```
+# 解决冲突后
+git add .
+git commit -m "Resolved conflicts with dev"
+```
+将 feature 分支合并回 dev 分支：
+```
+git checkout dev
+git merge feature
+```
+推送更改到远程仓库：
+```
+git push origin dev
+```
+在 Git 中，git pull origin dev 是一个常见的命令，它的作用是从远程仓库（origin）拉取指定分支（dev）的最新更改并将这些更改合并到当前分支。
+
+从远程仓库获取最新的更改：相当于执行 git fetch origin dev，它会从远程仓库获取 dev 分支的最新提交和对象。
+将这些更改合并到当前分支：相当于执行 git merge origin/dev，它会将获取到的 dev 分支的更改合并到你当前所在的分支。
 
 如果报错`fatal: refusing to merge unrelated histories`使用下面指令
 
