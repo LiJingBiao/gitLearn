@@ -548,7 +548,79 @@ git add * #添加要上传的大文件，*表示路径下的所有文件
 git commit -m "Git LFS commit" #添加大文件上传的说明
 git push origin master #上传大文件
 ```
+## 使用git pull origin feature/dev_7.2.0 hint: You have divergent branches and need to specify how to reconcile them. hint: You can do so by running one of the following commands sometime before
+```
+% git checkout -b feature/lijingbiao/miniApi_merge 
+Switched to a new branch 'feature/lijingbiao/miniApi_merge'
+% git pull origin feature/dev_7.2.0               
+From coding.xxxx.com:app/xxxxMEApp
+ * branch                  feature/dev_7.2.0 -> FETCH_HEAD
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+% git config pull.rebase false
+% git pull origin feature/dev_7.2.0
+```
+这个提示信息表明你的本地分支和远程分支之间有分歧（divergent branches），Git 不确定应该如何合并这些更改。你需要指定合并策略。以下是你可以采取的步骤：
 
+合并（merge）：这会创建一个合并提交，将两个分支的历史合并在一起。
+```
+git config pull.rebase false
+```
+重基（rebase）：这会将你的本地提交重新应用到远程分支的顶部，创建一个线性的历史。
+```
+git config pull.rebase true
+```
+仅快进（fast-forward only）：这只会在没有分歧的情况下进行合并，否则会失败。
+```
+git config pull.ff only
+```
+你可以选择其中一种策略来解决当前的分歧。具体操作如下：
+
+1. 合并（merge）
+如果你希望使用合并策略，可以运行：
+```
+git config pull.rebase false
+git pull origin feature/dev_7.2.0
+```
+2. 重基（rebase）
+如果你希望使用重基策略，可以运行：
+```
+git config pull.rebase true
+git pull origin feature/dev_7.2.0
+```
+3. 仅快进（fast-forward only）
+如果你希望只在没有分歧的情况下进行合并，可以运行：
+```
+git config pull.ff only
+git pull origin feature/dev_7.2.0
+```
+临时指定策略
+如果你只想临时指定一次策略，可以在命令行中直接使用参数：
+
+对于合并：
+```
+git pull --no-rebase origin feature/dev_7.2.0
+```
+对于重基：
+```
+git pull --rebase origin feature/dev_7.2.0
+```
+对于仅快进：
+```
+git pull --ff-only origin feature/dev_7.2.0
+```
+选择合适的策略后，执行相应的命令即可解决分支分歧问题。
 
 ## [git教程](https://github.com/geeeeeeeeek/git-recipes/wiki/)
 
