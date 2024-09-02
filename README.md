@@ -699,7 +699,18 @@ $ ssh -T git@github.com
 ```
 
 
-
+git下载工程报错
+```
+sudo vim ~/.ssh/config
+Host *
+ServerAliveInterval 60
+ServerAliveCountMax 30
+```
+git checkout xxx && git pull命令合并,在`~/.gitconfig`中
+```
+[alias]
+    cop = "!f() { git checkout $1 && git pull origin $1; }; f"
+```
 
 
 
