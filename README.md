@@ -712,7 +712,264 @@ git checkout xxx && git pull命令合并,在`~/.gitconfig`中
     cop = "!f() { git checkout $1 && git pull origin $1; }; f"
 ```
 
+## 子模块
+以下是关于 Git 子模块拉取和更新的主要命令：
 
+1. 克隆包含子模块的项目:
+```bash
+# 方式1：克隆时同时下载子模块
+git clone --recursive [URL]
+
+# 方式2：克隆后再初始化子模块
+git clone [URL]
+git submodule init
+git submodule update
+```
+
+2. 更新子模块:
+```bash
+# 更新所有子模块到最新提交
+git submodule update --remote
+
+# 更新特定子模块
+git submodule update --remote [submodule_name]
+
+# 更新子模块到主仓库记录的提交点
+git submodule update --init
+```
+
+3. 拉取子模块变更:
+```bash
+# 一次性拉取所有子模块的变更
+git pull --recurse-submodules
+
+# 先进入子模块目录再拉取
+cd [submodule_directory]
+git pull origin master
+```
+
+4. 查看子模块状态:
+```bash
+# 查看子模块信息
+git submodule status
+
+# 查看子模块详细信息
+git submodule foreach git status
+```
+
+5. 添加新的子模块:
+```bash
+git submodule add [URL] [path]
+```
+
+注意事项：
+- 子模块默认处于分离头指针(detached HEAD)状态
+- 更新子模块前最好先确保主仓库无未提交的修改
+- 如果子模块有自己的子模块，可能需要递归操作
+- 建议在对子模块做修改前先切换到具体分支
+
+git submodule update 的这两个选项有重要的区别：
+
+1. `git submodule update --init`
+- 将子模块更新到主仓库记录的特定提交点
+- 使用的是主仓库中记录的子模块提交 hash
+- 适用于需要和团队保持一致的场景
+- 相当于把子模块"锁定"在特定版本
+
+例如:
+```bash
+# 主仓库记录子模块commit为 abc123
+# 执行后子模块就会切换到 abc123
+git submodule update --init
+```
+
+2. `git submodule update --remote`
+- 将子模块更新到远程仓库的最新提交
+- 会直接拉取子模块远程仓库的最新代码
+- 适用于需要使用子模块最新功能的场景
+- 可能会导致团队成员之间不一致
+
+例如:
+```bash
+# 子模块远程最新commit为 xyz789
+# 执行后子模块会更新到 xyz789
+git submodule update --remote
+```
+
+使用建议：
+- 团队协作时优先使用 `--init` 保持一致性
+- 需要更新子模块时:
+  1. 先用 `--remote` 更新到最新
+  2. 测试没问题后提交主仓库
+  3. 其他成员再用 `--init` 同步
+
+这样可以避免团队成员使用不同版本的子模块导致的问题。
+
+提交子模块需要分两步：先提交子模块的修改，再提交主仓库的变更。具体步骤如下：
+
+1. 提交子模块修改:
+```bash
+# 进入子模块目录
+cd [submodule_directory]
+
+# 常规的 git 提交流程
+git add .
+git commit -m "子模块的修改信息"
+git push origin [branch_name]
+```
+
+2. 提交主仓库:
+```bash
+# 回到主仓库目录
+cd ..
+
+# 此时会看到子模块有新的提交
+git status  # 会显示子模块有更改
+
+# 提交主仓库中的子模块变更
+git add [submodule_directory]
+git commit -m "更新子模块到新版本"
+git push
+```
+
+使用简化命令：
+```bash
+# 一次性查看所有子模块的状态
+git submodule foreach git status
+
+# 一次性添加所有子模块的更改
+git submodule foreach git add .
+
+# 一次性提交所有子模块的更改
+git submodule foreach git commit -m "提交信息"
+
+# 一次性推送所有子模块的更改
+git submodule foreach git push
+```
+
+注意事项：
+1. 确保先提交子模块再提交主仓库
+2. 子模块的提交需要推送到远程
+3. 主仓库记录的是子模块的提交指针
+4. 如果忘记推送子模块，其他人更新时会遇到问题
+
+最佳实践：
+```bash
+# 1. 确认在正确的分支
+git submodule foreach git checkout main
+
+# 2. 提交子模块更改
+git submodule foreach git add .
+git submodule foreach git commit -m "update submodule"
+git submodule foreach git push
+
+# 3. 提交主仓库更改
+git add .
+git commit -m "update submodules"
+git push
+```
+
+`git submodule foreach` 是一个用于在所有子模块上执行命令的工具。它会遍历项目中的每个子模块，并在每个子模块目录中执行指定的命令。
+
+基本语法：
+```bash
+git submodule foreach '<command>'
+```
+
+常见用例：
+
+1. 查看所有子模块状态：
+```bash
+git submodule foreach git status
+```
+
+2. 切换所有子模块分支：
+```bash
+git submodule foreach git checkout main
+```
+
+3. 拉取所有子模块更新：
+```bash
+git submodule foreach git pull origin main
+```
+
+4. 批量提交：
+```bash
+git submodule foreach 'git add . && git commit -m "update"'
+```
+
+特点：
+1. 自动遍历 - 自动在每个子模块中执行命令
+2. 显示路径 - 会显示当前执行命令的子模块路径
+3. 支持复杂命令 - 可以用引号包含多个命令
+4. 支持中断 - 可以用 ctrl+c 中断执行
+
+举个实际例子：
+```bash
+# 项目结构
+main-repo/
+  ├── sub1/   # 子模块1
+  ├── sub2/   # 子模块2
+  └── sub3/   # 子模块3
+
+# 执行命令
+git submodule foreach git status
+
+# 输出可能是：
+Entering 'sub1'
+On branch main
+nothing to commit, working tree clean
+Entering 'sub2'
+On branch main
+modified: file.txt
+Entering 'sub3'
+On branch main
+nothing to commit, working tree clean
+```
+
+这个命令需要在主仓库的根目录下执行，而不是在子模块目录内。
+
+例如:
+```bash
+# 项目结构
+main-repo/         # ← 在这里执行命令
+  ├── sub1/
+  ├── sub2/
+  └── sub3/
+
+# 正确的执行位置
+cd main-repo
+git submodule foreach 'git add . && git commit -m "update"'
+
+# 错误的执行位置
+cd main-repo/sub1  # ❌ 不要在子模块目录内执行
+```
+
+工作原理：
+1. `git submodule foreach` 命令会：
+   - 从主仓库根目录开始
+   - 自动进入每个子模块目录
+   - 执行指定的命令
+   - 然后返回继续处理下一个子模块
+
+2. 执行顺序示例：
+```bash
+# 在 main-repo/ 下执行命令后
+Entering 'sub1'
+[master abc1234] update
+Entering 'sub2'
+[master def5678] update
+Entering 'sub3'
+[master ghi9012] update
+```
+
+如果你当前在子模块目录中，需要：
+```bash
+# 先回到主仓库根目录
+cd ..   # 或者适当的路径返回主仓库根目录
+# 再执行命令
+git submodule foreach 'git add . && git commit -m "update"'
+```
 
 
 
