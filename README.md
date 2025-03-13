@@ -1141,9 +1141,10 @@ git submodule foreach 'git add . && git commit -m "update"'
 ```
 
 
+## git回滚到某次提交
+git reset --hard <commit-hash>
 
-
-
+git reset --soft HEAD
 
 
 
