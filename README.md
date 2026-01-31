@@ -1148,16 +1148,16 @@ git reset --soft HEAD
 
 
 ## 将本地代码推送到git上的非空仓库操作
-
+推荐
 ```
 # 1. 初始化并添加远程仓库（如果还没添加）
 git init
 git remote add origin https://github.com/username/repo.git
 
 # 2. 拉取远程内容（使用 --allow-unrelated-histories 允许合并不相关历史）
-git pull origin main --allow-unrelated-histories
+git pull origin main --allow-unrelated-histories --rebase
 # 或如果是 master 分支：
-git pull origin master --allow-unrelated-histories
+git pull origin master --allow-unrelated-histories --rebase
 
 # 3. 处理可能的合并冲突（如果有）
 # 编辑冲突文件后：
@@ -1167,7 +1167,13 @@ git commit -m "Merge remote and local changes"
 # 4. 推送
 git push origin main
 ```
-
+强制推送
+```
+# 强制推送到远程，覆盖原有内容
+git push -u origin main --force
+# 或简写：
+git push -u origin main -f
+```
 
 
 
